@@ -1,0 +1,19 @@
+{
+    "name": "danwithams/trading212-api",
+    "type": "library",
+    "require": {
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "DanWithams\\Trading212Api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Daniel Withams",
+            "email": "me@danwithams.com"
+        }
+    ]
+}
