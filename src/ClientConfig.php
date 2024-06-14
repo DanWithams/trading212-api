@@ -2,13 +2,17 @@
 
 namespace DanWithams\Trading212Api;
 
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\Psr7\Response;
+
 class ClientConfig
 {
     public function __construct(
         protected string $hostname,
         protected string $secret,
         protected ?string $port = null,
-        protected bool $secure = true
+        protected bool $secure = true,
+        protected ?MockHandler $mock = null
     ) {
 
     }
@@ -59,6 +63,17 @@ class ClientConfig
     public function setSecret(string $secret): ClientConfig
     {
         $this->secret = $secret;
+        return $this;
+    }
+
+    public function getMock(): ?MockHandler
+    {
+        return $this->mock;
+    }
+
+    public function setMock(MockHandler $mock): ClientConfig
+    {
+        $this->mock = $mock;
         return $this;
     }
 }
