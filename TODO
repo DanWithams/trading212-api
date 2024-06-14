@@ -1,0 +1,3 @@
+"instrumentShares" should be modelled but it may come up in a response in other section of the API (e.g. Instruments Metadata)
+All response classes need to hydrate properly with concrete methods and nested objects
+Differentiate between what should be Feature and Unit tests
