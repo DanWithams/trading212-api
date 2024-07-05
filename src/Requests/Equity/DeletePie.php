@@ -3,14 +3,18 @@
 namespace DanWithams\Trading212Api\Requests\Equity;
 
 use DanWithams\Trading212Api\Enums\HttpVerb;
+use DanWithams\Trading212Api\Models\Equity\Pie;
+use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Requests\BaseRequest;
-use DanWithams\Trading212Api\Responses\DeletePie as DeletePieResponse;
+use Psr\Http\Message\ResponseInterface;
 
 class DeletePie extends BaseRequest
 {
-    public function __construct(protected int $id)
-    {
+    protected $id;
 
+    public function __construct(protected Pie|PieSummary|int $pie)
+    {
+        $this->id = is_int($pie) ? $pie : $pie->getId();
     }
 
     public function getVerb(): HttpVerb
@@ -38,8 +42,8 @@ class DeletePie extends BaseRequest
         return null;
     }
 
-    public static function getResponseClass(): string
+    public static function createResponse(ResponseInterface $response)
     {
-        return DeletePieResponse::class;
+        return true;
     }
 }

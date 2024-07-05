@@ -2,9 +2,10 @@
 
 namespace DanWithams\Trading212Api\Requests\Equity;
 
+use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\HttpVerb;
 use DanWithams\Trading212Api\Requests\BaseRequest;
-use DanWithams\Trading212Api\Responses\FetchPies as FetchPiesResponse;
+use Psr\Http\Message\ResponseInterface;
 
 class FetchPies extends BaseRequest
 {
@@ -33,8 +34,10 @@ class FetchPies extends BaseRequest
         return '';
     }
 
-    public static function getResponseClass(): string
+    public static function createResponse(ResponseInterface $response)
     {
-        return FetchPiesResponse::class;
+        $data = self::parseResponse($response);
+
+        return new PieCollection($data);
     }
 }

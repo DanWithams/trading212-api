@@ -6,8 +6,9 @@ use Carbon\Carbon;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\HttpVerb;
 use DanWithams\Trading212Api\Enums\Icon;
+use DanWithams\Trading212Api\Models\Equity\Pie;
 use DanWithams\Trading212Api\Requests\BaseRequest;
-use DanWithams\Trading212Api\Responses\CreatePie as CreatePieResponse;
+use Psr\Http\Message\ResponseInterface;
 
 class CreatePie extends BaseRequest
 {
@@ -46,16 +47,18 @@ class CreatePie extends BaseRequest
     {
         return json_encode([
             'name' => $this->name,
-            'dividendCashAction' => $this->dividendCashAction,
+            'dividendCashAction' => $this->dividendCashAction->name,
             'endDate' => $this->endDate->format('Y-m-d\TH:i:s\Z'),
             'goal' => $this->goal,
-            'icon' => $this->icon,
+            'icon' => $this->icon->name,
             'instrumentShares' => $this->instrumentShares,
         ]);
     }
 
-    public static function getResponseClass(): string
+    public static function createResponse(ResponseInterface $response)
     {
-        return CreatePieResponse::class;
+        $data = self::parseResponse($response);
+
+        return new Pie($data);
     }
 }

@@ -3,19 +3,17 @@
 namespace DanWithams\Trading212Api;
 
 use Carbon\Carbon;
+use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
 use DanWithams\Trading212Api\Exceptions\IncorrectResponseException;
+use DanWithams\Trading212Api\Models\Equity\Pie;
+use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Requests\Equity\CreatePie;
 use DanWithams\Trading212Api\Requests\Equity\DeletePie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPies;
 use DanWithams\Trading212Api\Requests\Equity\UpdatePie;
-use DanWithams\Trading212Api\Responses\FetchPies as FetchPiesResponse;
-use DanWithams\Trading212Api\Responses\CreatePie as CreatePieResponse;
-use DanWithams\Trading212Api\Responses\DeletePie as DeletePieResponse;
-use DanWithams\Trading212Api\Responses\FetchPie as FetchPieResponse;
-use DanWithams\Trading212Api\Responses\UpdatePie as UpdatePieResponse;
 
 class Trading212
 {
@@ -29,11 +27,11 @@ class Trading212
     /**
      * @throws IncorrectResponseException
      */
-    public function fetchPies(): FetchPiesResponse
+    public function fetchPies(): PieCollection
     {
         $response = $this->client->sendRequest(new FetchPies);
 
-        if (! ($response instanceof FetchPiesResponse)) {
+        if (! ($response instanceof PieCollection)) {
             $this->throwBadResponseException();
         }
 
@@ -47,7 +45,7 @@ class Trading212
         float $goal,
         Icon $icon,
         array $instrumentShares = []
-    ): CreatePieResponse
+    ): Pie
     {
         $response = $this->client->sendRequest(
             new CreatePie(
@@ -60,29 +58,25 @@ class Trading212
             )
         );
 
-        if (! ($response instanceof CreatePieResponse)) {
+        if (! ($response instanceof Pie)) {
             $this->throwBadResponseException();
         }
 
         return $response;
     }
 
-    public function deletePie(int $id)
+    public function deletePie(Pie|PieSummary|int $pie): bool
     {
-        $response = $this->client->sendRequest(new DeletePie($id));
+        $this->client->sendRequest(new DeletePie($pie));
 
-        if (! ($response instanceof DeletePieResponse)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return true;
     }
 
-    public function fetchPie(int $id)
+    public function fetchPie(PieSummary|int $pie): Pie
     {
-        $response = $this->client->sendRequest(new FetchPie($id));
+        $response = $this->client->sendRequest(new FetchPie($pie));
 
-        if (! ($response instanceof FetchPieResponse)) {
+        if (! ($response instanceof Pie)) {
             $this->throwBadResponseException();
         }
 

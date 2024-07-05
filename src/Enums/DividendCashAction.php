@@ -2,8 +2,8 @@
 
 namespace DanWithams\Trading212Api\Enums;
 
-enum DividendCashAction
+enum DividendCashAction: string
 {
-    case REINVEST;
-    case TO_ACCOUNT_CASH;
+    case REINVEST = 'REINVEST';
+    case TO_ACCOUNT_CASH = 'TO_ACCOUNT_CASH';
 }

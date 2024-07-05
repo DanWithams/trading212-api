@@ -22,12 +22,13 @@ class Client
         return $this->config->getProtocol() . '://' . $this->config->getHostname(withPort: true) . '/api/v0/';
     }
 
-    public function sendRequest(BaseRequest $request): BaseResponse
+    public function sendRequest(BaseRequest $request)
     {
         $httpClient = new Guzzle([
             'base_uri' => $this->generateBaseUri(),
             'headers' => [
                 'Authorization' => $this->config->getSecret(),
+                'Content-type' => 'application/json',
             ],
             ... $this->config->getMock() ? [ 'handler' => HandlerStack::create($this->config->getMock()) ] : [],
         ]);
@@ -37,21 +38,22 @@ class Client
                 $request->getVerb()->name,
                 $request->getResourceUri(),
                 [
-                    'form_params' => $request->getData(),
+                    'body' => $request->getBody(),
                 ]
             );
         } catch (Throwable $throwable) {
-            // throw $throwable;
             // TODO: Handle different exception types (4xx 5xx, other)
+            if (method_exists($throwable, 'getResponse')) {
+                var_dump((string) $throwable->getRequest()->getBody());
+                var_dump((string) $throwable->getResponse()->getBody());
+            }
+            throw $throwable;
         }
 
-        return $this->handleResponse($response, $request);
-    }
+        if (method_exists($response, 'getBody')) {
+            var_dump((string) $response->getBody());
+        }
 
-    protected function handleResponse(ResponseInterface $response, BaseRequest $request): BaseResponse
-    {
-        return $request->createResponseObject(
-            json_decode((string) $response->getBody(), true)
-        );
+        return $request->createResponse($response);
     }
 }
