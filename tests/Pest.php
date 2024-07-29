@@ -57,5 +57,5 @@ function getJsonPayload(string $name): string
     $path = __DIR__ . "/Payloads/$name.json";
     return file_exists($path)
         ? file_get_contents($path)
-        : throw new Exception('Poo');
+        : throw new Exception("Payload \"$name\" not found.");
 }
