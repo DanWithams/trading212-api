@@ -15,11 +15,13 @@ readonly class PieResult
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            investedValue: $data['investedValue'],
-            result: $data['result'],
-            resultCoefficient: $data['resultCoef'],
-            value: $data['value']
+            investedValue: $data->get('investedValue'),
+            result: $data->get('result'),
+            resultCoefficient: $data->get('resultCoef'),
+            value: $data->get('value')
         );
     }
 }

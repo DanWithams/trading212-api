@@ -21,9 +21,11 @@ readonly class Pie implements HasId
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            instruments: new InstrumentsCollection($data['instruments']),
-            settings: PieSettings::hydrateFromApi($data['settings'])
+            instruments: new InstrumentsCollection($data->get('instruments')),
+            settings: PieSettings::hydrateFromApi($data->get('settings'))
         );
     }
 }

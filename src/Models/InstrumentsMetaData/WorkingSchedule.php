@@ -15,9 +15,11 @@ readonly class WorkingSchedule
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            id: $data['id'],
-            timeEvents: new TimeEventCollection($data['timeEvents'])
+            id: $data->get('id'),
+            timeEvents: new TimeEventCollection($data->get('timeEvents'))
         );
     }
 }

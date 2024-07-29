@@ -16,9 +16,11 @@ readonly class TimeEvent
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            date: Carbon::parse($data['date']),
-            type: TimeEventType::from($data['type'])
+            date: Carbon::parse($data->get('date')),
+            type: TimeEventType::from($data->get('type'))
         );
     }
 }

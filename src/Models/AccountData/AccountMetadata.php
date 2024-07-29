@@ -15,9 +15,11 @@ readonly class AccountMetadata
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            id: $data['id'],
-            currencyCode: Currency::from($data['currencyCode'])
+            id: $data->get('id'),
+            currencyCode: Currency::from($data->get('currencyCode'))
         );
     }
 }

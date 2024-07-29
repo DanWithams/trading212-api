@@ -16,10 +16,12 @@ readonly class Exchange
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            id: $data['id'],
-            name: $data['name'],
-            workingSchedules: new WorkingScheduleCollection($data['workingSchedules']),
+            id: $data->get('id'),
+            name: $data->get('name'),
+            workingSchedules: new WorkingScheduleCollection($data->get('workingSchedules')),
         );
     }
 }

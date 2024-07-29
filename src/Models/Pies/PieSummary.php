@@ -25,13 +25,15 @@ readonly class PieSummary implements HasId
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            id: $data['id'],
-            cash: $data['cash'],
-            dividendDetails: DividendDetails::hydrateFromApi($data['dividendDetails']),
-            progress: $data['progress'],
-            status: $data['status'],
-            result: PieResult::hydrateFromApi($data['result'])
+            id: $data->get('id'),
+            cash: $data->get('cash'),
+            dividendDetails: DividendDetails::hydrateFromApi($data->get('dividendDetails')),
+            progress: $data->get('progress'),
+            status: $data->get('status'),
+            result: PieResult::hydrateFromApi($data->get('result'))
         );
     }
 }

@@ -25,17 +25,19 @@ readonly class PieSettings
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            id: $data['id'],
-            name: $data['name'],
-            dividendCashAction: DividendCashAction::from($data['dividendCashAction']),
-            goal: $data['goal'],
-            initialInvestment: $data['initialInvestment'],
-            instrumentShares: $data['instrumentShares'],
-            icon: Icon::tryFrom($data['icon'] ?? ''),
-            publicUrl: $data['publicUrl'],
-            creationDate: Carbon::parse($data['creationDate']),
-            endDate: Carbon::parse($data['endDate'])
+            id: $data->get('id'),
+            name: $data->get('name'),
+            dividendCashAction: DividendCashAction::from($data->get('dividendCashAction')),
+            goal: $data->get('goal'),
+            initialInvestment: $data->get('initialInvestment'),
+            instrumentShares: $data->get('instrumentShares'),
+            icon: Icon::tryFrom($data->get('icon') ?? ''),
+            publicUrl: $data->get('publicUrl'),
+            creationDate: Carbon::parse($data->get('creationDate')),
+            endDate: Carbon::parse($data->get('endDate'))
         );
     }
 }

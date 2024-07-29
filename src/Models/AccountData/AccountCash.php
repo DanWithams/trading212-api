@@ -18,14 +18,16 @@ readonly class AccountCash
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data);
+
         return new self(
-            free: $data['free'],
-            invested: $data['invested'],
-            pieCash: $data['pieCash'],
-            ppl: $data['ppl'],
-            result: $data['result'],
-            total: $data['total'],
-            blocked: $data['blocked']
+            free: $data->get('free'),
+            invested: $data->get('invested'),
+            pieCash: $data->get('pieCash'),
+            ppl: $data->get('ppl'),
+            result: $data->get('result'),
+            total: $data->get('total'),
+            blocked: $data->get('blocked')
         );
     }
 }
