@@ -3,6 +3,7 @@
 namespace DanWithams\Trading212Api;
 
 use Carbon\Carbon;
+use DanWithams\Trading212Api\Collections\ExchangeCollection;
 use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
@@ -14,6 +15,7 @@ use DanWithams\Trading212Api\Requests\Equity\DeletePie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPies;
 use DanWithams\Trading212Api\Requests\Equity\UpdatePie;
+use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchExchangeList;
 
 class Trading212
 {
@@ -22,6 +24,17 @@ class Trading212
     public function __construct(ClientConfig $config)
     {
         $this->client = new Client($config);
+    }
+
+    public function fetchExchangeList(): ExchangeCollection
+    {
+        $response = $this->client->sendRequest(new FetchExchangeList);
+
+        if (! ($response instanceof ExchangeCollection)) {
+            $this->throwBadResponseException();
+        }
+
+        return $response;
     }
 
     /**

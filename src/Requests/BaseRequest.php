@@ -16,6 +16,8 @@ abstract class BaseRequest
 
     public static function parseResponse(ResponseInterface $response): array
     {
+//        file_put_contents('./out.json', (string) $response->getBody());
+
         return json_decode((string) $response->getBody(), true);
     }
 }
