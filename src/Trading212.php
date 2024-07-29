@@ -34,24 +34,12 @@ class Trading212
 
     public function fetchExchanges(): ExchangeCollection
     {
-        $response = $this->client->sendRequest(new FetchExchange);
-
-        if (! ($response instanceof ExchangeCollection)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return $this->client->sendRequest(new FetchExchange);
     }
 
     public function fetchInstruments(): InstrumentsCollection
     {
-        $response = $this->client->sendRequest(new FetchInstruments());
-
-        if (! ($response instanceof InstrumentsCollection)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return $this->client->sendRequest(new FetchInstruments());
     }
 
     /**
@@ -59,13 +47,7 @@ class Trading212
      */
     public function fetchPies(): PieCollection
     {
-        $response = $this->client->sendRequest(new FetchPies);
-
-        if (! ($response instanceof PieCollection)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return $this->client->sendRequest(new FetchPies);
     }
 
     public function createPie(
@@ -77,7 +59,7 @@ class Trading212
         array $instrumentShares = []
     ): Pie
     {
-        $response = $this->client->sendRequest(
+        return $this->client->sendRequest(
             new CreatePie(
                 name: $name,
                 dividendCashAction: $dividendCashAction,
@@ -87,12 +69,6 @@ class Trading212
                 instrumentShares: $instrumentShares
             )
         );
-
-        if (! ($response instanceof Pie)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
     }
 
     public function deletePie(Pie|PieSummary|int $pie): bool
@@ -104,13 +80,7 @@ class Trading212
 
     public function fetchPie(PieSummary|int $pie): Pie
     {
-        $response = $this->client->sendRequest(new FetchPie($pie));
-
-        if (! ($response instanceof Pie)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return $this->client->sendRequest(new FetchPie($pie));
     }
 
     public function updatePie(
@@ -123,7 +93,7 @@ class Trading212
         ?array $instrumentShares = null
     ): Pie
     {
-        $response = $this->client->sendRequest(
+        return $this->client->sendRequest(
             new UpdatePie(
                 pie: $pie,
                 name: $name,
@@ -134,41 +104,15 @@ class Trading212
                 instrumentShares: $instrumentShares
             )
         );
-
-        if (! ($response instanceof Pie)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
     }
 
     public function fetchAccountCash(): AccountCash
     {
-        $response = $this->client->sendRequest(new FetchAccountCash);
-
-        if (! ($response instanceof AccountCash)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
+        return $this->client->sendRequest(new FetchAccountCash);
     }
 
     public function fetchAccountMetadata(): AccountMetadata
     {
-        $response = $this->client->sendRequest(new FetchAccountMetadata);
-
-        if (! ($response instanceof AccountMetadata)) {
-            $this->throwBadResponseException();
-        }
-
-        return $response;
-    }
-
-    /**
-     * @throws IncorrectResponseException
-     */
-    protected function throwBadResponseException(): never
-    {
-        throw new IncorrectResponseException();
+        return $this->client->sendRequest(new FetchAccountMetadata);
     }
 }
