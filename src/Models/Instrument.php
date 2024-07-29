@@ -4,7 +4,7 @@ namespace DanWithams\Trading212Api\Models;
 
 use DanWithams\Trading212Api\Enums\InstrumentType;
 
-class Instrument
+readonly class Instrument
 {
     public function __construct(
         public string $ticker,
