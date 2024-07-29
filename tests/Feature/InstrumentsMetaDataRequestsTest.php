@@ -5,6 +5,7 @@ use DanWithams\Trading212Api\Collections\ExchangeCollection;
 use DanWithams\Trading212Api\Collections\InstrumentsCollection;
 use DanWithams\Trading212Api\Collections\TimeEventCollection;
 use DanWithams\Trading212Api\Collections\WorkingScheduleCollection;
+use DanWithams\Trading212Api\Enums\InstrumentType;
 use DanWithams\Trading212Api\Enums\TimeEventType;
 use DanWithams\Trading212Api\Models\Instrument;
 use DanWithams\Trading212Api\Models\InstrumentsMetaData\Exchange;
@@ -53,9 +54,13 @@ test('fetch instruments', function () {
 
     $instruments = $api->fetchInstruments();
 
+    var_dump($instruments->first());
+
     expect($instruments)->toBeInstanceOf(InstrumentsCollection::class)
         ->and($instruments)->toHaveCount(13924)
         ->and($instruments->first())->toBeInstanceOf(Instrument::class)
         ->and($instruments->first()->ticker)->toBeString('STN_US_EQ')
+        ->and($instruments->first()->type)->toEqual(InstrumentType::STOCK)
+        ->and($instruments->first()->workingScheduleId)->toBeInt(56)
     ;
 });
