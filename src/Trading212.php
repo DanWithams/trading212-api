@@ -26,7 +26,7 @@ class Trading212
         $this->client = $client instanceof Client ? $client : new Client($client);
     }
 
-    public function fetchExchangeList(): ExchangeCollection
+    public function fetchExchanges(): ExchangeCollection
     {
         $response = $this->client->sendRequest(new FetchExchangeList);
 

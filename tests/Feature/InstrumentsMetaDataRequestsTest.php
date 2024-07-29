@@ -21,7 +21,7 @@ test('fetch exchanges', function () {
         ])
     );
 
-    $exchanges = $api->fetchExchangeList();
+    $exchanges = $api->fetchExchanges();
 
     expect($exchanges)->toBeInstanceOf(ExchangeCollection::class)
         ->and($exchanges->first())->toBeInstanceOf(Exchange::class)
