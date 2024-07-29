@@ -9,12 +9,6 @@ $client = new \DanWithams\Trading212Api\ClientConfig(
 
 $trading212 = new \DanWithams\Trading212Api\Trading212($client);
 
-$exchanges = $trading212->fetchExchangeList();
+$exchanges = $trading212->fetchInstruments();
 
-
-var_dump(
-    $exchanges->first()->workingSchedules->first()->id,
-    $exchanges->first()->workingSchedules->first()->timeEvents->first()->date->format('U'),
-    $exchanges->first()->workingSchedules->first()->timeEvents->first()->type,
-);
 

@@ -4,6 +4,7 @@ namespace DanWithams\Trading212Api;
 
 use Carbon\Carbon;
 use DanWithams\Trading212Api\Collections\ExchangeCollection;
+use DanWithams\Trading212Api\Collections\InstrumentsCollection;
 use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
@@ -16,6 +17,7 @@ use DanWithams\Trading212Api\Requests\Equity\FetchPie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPies;
 use DanWithams\Trading212Api\Requests\Equity\UpdatePie;
 use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchExchangeList;
+use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchInstruments;
 
 class Trading212
 {
@@ -31,6 +33,17 @@ class Trading212
         $response = $this->client->sendRequest(new FetchExchangeList);
 
         if (! ($response instanceof ExchangeCollection)) {
+            $this->throwBadResponseException();
+        }
+
+        return $response;
+    }
+
+    public function fetchInstruments(): InstrumentsCollection
+    {
+        $response = $this->client->sendRequest(new FetchInstruments());
+
+        if (! ($response instanceof InstrumentsCollection)) {
             $this->throwBadResponseException();
         }
 

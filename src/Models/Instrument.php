@@ -2,15 +2,19 @@
 
 namespace DanWithams\Trading212Api\Models;
 
+use DanWithams\Trading212Api\Enums\InstrumentType;
+
 class Instrument
 {
     public function __construct(
         public string $ticker,
-        public array $result,
-        public float $expectedShare,
-        public float $currentShare,
-        public float $ownedQuantity,
-        public array $issues
+        public ?InstrumentType $type,
+        public ?int $workingScheduleId,
+        public ?array $result,
+        public ?float $expectedShare,
+        public ?float $currentShare,
+        public ?float $ownedQuantity,
+        public ?array $issues
     ) {
 
     }
@@ -19,11 +23,13 @@ class Instrument
     {
         return new self(
             ticker: $data['ticker'],
-            result: $data['result'],
-            expectedShare: $data['expectedShare'],
-            currentShare: $data['currentShare'],
-            ownedQuantity: $data['ownedQuantity'],
-            issues: $data['issues'],
+            type: InstrumentType::tryFrom($data['type'] ?? ''),
+            workingScheduleId: $data['workingScheduleId'] ?? null,
+            result: $data['result'] ?? null,
+            expectedShare: $data['expectedShare'] ?? null,
+            currentShare: $data['currentShare'] ?? null,
+            ownedQuantity: $data['ownedQuantity'] ?? null,
+            issues: $data['issues'] ?? null,
         );
     }
 }

@@ -1,3 +1,4 @@
 "instrumentShares" should be modelled but it may come up in a response in other section of the API (e.g. Instruments Metadata)
 Differentiate between what should be Feature and Unit tests
 EditPie is not currently working from their side
+Rename FetchExchangeList to FetchExchanges

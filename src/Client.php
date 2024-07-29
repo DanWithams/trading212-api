@@ -44,14 +44,14 @@ class Client
         } catch (Throwable $throwable) {
             // TODO: Handle different exception types (4xx 5xx, other)
             if (method_exists($throwable, 'getResponse')) {
-                var_dump((string) $throwable->getRequest()->getBody());
-                var_dump((string) $throwable->getResponse()->getBody());
+//                var_dump((string) $throwable->getRequest()->getBody());
+//                var_dump((string) $throwable->getResponse()->getBody());
             }
             throw $throwable;
         }
 
         if (method_exists($response, 'getBody')) {
-            var_dump((string) $response->getBody());
+//            var_dump((string) $response->getBody());
         }
 
         return $request->createResponse($response);
