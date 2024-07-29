@@ -61,6 +61,5 @@ test('fetch instruments', function () {
         ->and($instruments->first())->toBeInstanceOf(Instrument::class)
         ->and($instruments->first()->ticker)->toBeString('STN_US_EQ')
         ->and($instruments->first()->type)->toEqual(InstrumentType::STOCK)
-        ->and($instruments->first()->workingScheduleId)->toBeInt(56)
-    ;
+        ->and($instruments->first()->workingScheduleId)->toBeInt(56);
 });
