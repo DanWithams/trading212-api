@@ -66,6 +66,8 @@ class UpdatePie extends BaseRequest
 
     public static function createResponse(ResponseInterface $response)
     {
+        var_dump((string) $response->getBody());
+
         $data = self::parseResponse($response);
 
         return Pie::hydrateFromApi($data);

@@ -5,10 +5,10 @@ namespace DanWithams\Trading212Api\Models\Equity;
 readonly class PieResult
 {
     public function __construct(
-        protected float $investedValue,
-        protected float $result,
-        protected float $resultCoefficient,
-        protected float $value
+        public float $investedValue,
+        public float $result,
+        public float $resultCoefficient,
+        public float $value
     ) {
 
     }
