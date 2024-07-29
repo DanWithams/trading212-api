@@ -5,13 +5,13 @@ use DanWithams\Trading212Api\Collections\InstrumentsCollection;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
 use DanWithams\Trading212Api\Models\DividendDetails;
-use DanWithams\Trading212Api\Models\Equity\PieResult;
-use DanWithams\Trading212Api\Models\Equity\PieSettings;
+use DanWithams\Trading212Api\Models\Pies\PieResult;
+use DanWithams\Trading212Api\Models\Pies\PieSettings;
 use DanWithams\Trading212Api\Models\Instrument;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
-use DanWithams\Trading212Api\Models\Equity\Pie;
-use DanWithams\Trading212Api\Models\Equity\PieSummary;
+use DanWithams\Trading212Api\Models\Pies\Pie;
+use DanWithams\Trading212Api\Models\Pies\PieSummary;
 use DanWithams\Trading212Api\Collections\PieCollection;
 
 test('fetch pies', function () {

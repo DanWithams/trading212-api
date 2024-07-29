@@ -1,14 +1,22 @@
 <?php
 
-namespace DanWithams\Trading212Api\Requests\Equity;
+namespace DanWithams\Trading212Api\Requests\Pies;
 
-use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\HttpVerb;
+use DanWithams\Trading212Api\Models\Pies\Pie;
+use DanWithams\Trading212Api\Models\Pies\PieSummary;
 use DanWithams\Trading212Api\Requests\BaseRequest;
 use Psr\Http\Message\ResponseInterface;
 
-class FetchPies extends BaseRequest
+class FetchPie extends BaseRequest
 {
+    protected int $id;
+
+    public function __construct(PieSummary|int $pie)
+    {
+        $this->id = is_int($pie) ? $pie : $pie->getId();
+    }
+
     public function getVerb(): HttpVerb
     {
         return HttpVerb::GET;
@@ -16,7 +24,7 @@ class FetchPies extends BaseRequest
 
     public function getResourceUri(): string
     {
-        return 'equity/pies';
+        return 'equity/pies/' . $this->id;
     }
 
     public function getParams(): array
@@ -31,13 +39,13 @@ class FetchPies extends BaseRequest
 
     public function getBody(): ?string
     {
-        return '';
+        return null;
     }
 
     public static function createResponse(ResponseInterface $response)
     {
         $data = self::parseResponse($response);
 
-        return new PieCollection($data);
+        return Pie::hydrateFromApi($data);
     }
 }

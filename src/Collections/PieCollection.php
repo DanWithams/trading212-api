@@ -2,7 +2,7 @@
 
 namespace DanWithams\Trading212Api\Collections;
 
-use DanWithams\Trading212Api\Models\Equity\PieSummary;
+use DanWithams\Trading212Api\Models\Pies\PieSummary;
 use Illuminate\Support\Collection;
 
 class PieCollection extends Collection

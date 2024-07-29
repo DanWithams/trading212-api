@@ -1,6 +1,6 @@
 <?php
 
-namespace DanWithams\Trading212Api\Models\Equity;
+namespace DanWithams\Trading212Api\Models\Pies;
 
 use Carbon\Carbon;
 use DanWithams\Trading212Api\Enums\DividendCashAction;

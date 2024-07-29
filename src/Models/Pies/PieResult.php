@@ -1,6 +1,6 @@
 <?php
 
-namespace DanWithams\Trading212Api\Models\Equity;
+namespace DanWithams\Trading212Api\Models\Pies;
 
 readonly class PieResult
 {

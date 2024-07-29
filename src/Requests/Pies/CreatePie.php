@@ -1,12 +1,12 @@
 <?php
 
-namespace DanWithams\Trading212Api\Requests\Equity;
+namespace DanWithams\Trading212Api\Requests\Pies;
 
 use Carbon\Carbon;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\HttpVerb;
 use DanWithams\Trading212Api\Enums\Icon;
-use DanWithams\Trading212Api\Models\Equity\Pie;
+use DanWithams\Trading212Api\Models\Pies\Pie;
 use DanWithams\Trading212Api\Requests\BaseRequest;
 use Psr\Http\Message\ResponseInterface;
 

@@ -1,30 +1,22 @@
 <?php
 
-namespace DanWithams\Trading212Api\Requests\Equity;
+namespace DanWithams\Trading212Api\Requests\Pies;
 
+use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\HttpVerb;
-use DanWithams\Trading212Api\Models\Equity\Pie;
-use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Requests\BaseRequest;
 use Psr\Http\Message\ResponseInterface;
 
-class DeletePie extends BaseRequest
+class FetchPies extends BaseRequest
 {
-    protected $id;
-
-    public function __construct(protected Pie|PieSummary|int $pie)
-    {
-        $this->id = is_int($pie) ? $pie : $pie->getId();
-    }
-
     public function getVerb(): HttpVerb
     {
-        return HttpVerb::DELETE;
+        return HttpVerb::GET;
     }
 
     public function getResourceUri(): string
     {
-        return 'equity/pies/' . $this->id;
+        return 'equity/pies';
     }
 
     public function getParams(): array
@@ -39,11 +31,13 @@ class DeletePie extends BaseRequest
 
     public function getBody(): ?string
     {
-        return null;
+        return '';
     }
 
     public static function createResponse(ResponseInterface $response)
     {
-        return true;
+        $data = self::parseResponse($response);
+
+        return new PieCollection($data);
     }
 }

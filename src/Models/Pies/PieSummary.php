@@ -1,6 +1,6 @@
 <?php
 
-namespace DanWithams\Trading212Api\Models\Equity;
+namespace DanWithams\Trading212Api\Models\Pies;
 
 use DanWithams\Trading212Api\Contracts\HasId;
 use DanWithams\Trading212Api\Models\DividendDetails;
