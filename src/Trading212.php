@@ -9,8 +9,10 @@ use DanWithams\Trading212Api\Collections\PieCollection;
 use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
 use DanWithams\Trading212Api\Exceptions\IncorrectResponseException;
+use DanWithams\Trading212Api\Models\AccountData\AccountCash;
 use DanWithams\Trading212Api\Models\Equity\Pie;
 use DanWithams\Trading212Api\Models\Equity\PieSummary;
+use DanWithams\Trading212Api\Requests\AccountData\FetchAccountCash;
 use DanWithams\Trading212Api\Requests\Equity\CreatePie;
 use DanWithams\Trading212Api\Requests\Equity\DeletePie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPie;
@@ -135,6 +137,16 @@ class Trading212
             $this->throwBadResponseException();
         }
 
+        return $response;
+    }
+
+    public function fetchAccountCash(): AccountCash
+    {
+        $response = $this->client->sendRequest(new FetchAccountCash);
+
+        if (! ($response instanceof AccountCash)) {
+            $this->throwBadResponseException();
+        }
         return $response;
     }
 
