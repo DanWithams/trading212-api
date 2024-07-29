@@ -77,6 +77,7 @@ test('fetch a pie', function () {
     expect($response)->toBeInstanceOf(Pie::class);
 });
 
+// Update Pie currently broken on Trading212
 //test('update pie', function () {
 //    [$config, $api] = createApi();
 //
@@ -99,5 +100,5 @@ test('fetch a pie', function () {
 //        ],
 //    );
 //
-//    expect($response)->toBeInstanceOf(\DanWithams\Trading212Api\Responses\UpdatePie::class);
+//    expect($response)->toBeInstanceOf(Pie::class);
 //});

@@ -30,5 +30,5 @@ var_dump(
 //$trading212->deletePie(584742);
 
 var_dump(
-    $trading212->fetchPie($pies->first())
+    $trading212->updatePie($pies->first(), 'New Name 123')
 );

@@ -21,8 +21,6 @@ readonly class PieSettings
 
     public function __construct(array $data)
     {
-        var_dump($data);
-
         $this->id = $data['id'];
         $this->name = $data['name'];
         $this->dividendCashAction = DividendCashAction::from($data['dividendCashAction']);

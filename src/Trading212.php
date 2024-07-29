@@ -84,18 +84,18 @@ class Trading212
     }
 
     public function updatePie(
-        int $id,
-        string $name,
-        DividendCashAction $dividendCashAction,
-        Carbon $endDate,
-        float $goal,
-        Icon $icon,
-        array $instrumentShares = []
-    ): UpdatePieResponse
+        Pie|PieSummary|int $pie,
+        ?string $name = null,
+        ?DividendCashAction $dividendCashAction = null,
+        ?Carbon $endDate = null,
+        ?float $goal = null,
+        ?Icon $icon = null,
+        ?array $instrumentShares = null
+    ): Pie
     {
         $response = $this->client->sendRequest(
             new UpdatePie(
-                id: $id,
+                pie: $pie,
                 name: $name,
                 dividendCashAction: $dividendCashAction,
                 endDate: $endDate,
@@ -105,7 +105,7 @@ class Trading212
             )
         );
 
-        if (! ($response instanceof UpdatePieResponse)) {
+        if (! ($response instanceof Pie)) {
             $this->throwBadResponseException();
         }
 
