@@ -38,8 +38,8 @@ test('fetch exchanges', function () {
         ->and($exchanges->first()->workingSchedules->first()->timeEvents->first()->date)->toBeInstanceOf(Carbon::class)
         ->and($exchanges->first()->workingSchedules->first()->timeEvents->first()->date)->toEqual(Carbon::parse('2024-07-15 07:00:00'))
         ->and($exchanges->first()->workingSchedules->first()->timeEvents->get(1)->date)->toEqual(Carbon::parse('2024-07-15 15:30:00'))
-        ->and($exchanges->first()->workingSchedules->first()->timeEvents->first()->type)->toBeIn(TimeEventType::cases())
-        ->and($exchanges->first()->workingSchedules->first()->timeEvents->get(1)->type)->toBeIn(TimeEventType::cases());
+        ->and($exchanges->first()->workingSchedules->first()->timeEvents->first()->type)->toEqual(TimeEventType::OPEN)
+        ->and($exchanges->first()->workingSchedules->first()->timeEvents->get(1)->type)->toEqual(TimeEventType::CLOSE);
 });
 
 test('fetch instruments', function () {
@@ -59,7 +59,9 @@ test('fetch instruments', function () {
     expect($instruments)->toBeInstanceOf(InstrumentsCollection::class)
         ->and($instruments)->toHaveCount(13924)
         ->and($instruments->first())->toBeInstanceOf(Instrument::class)
-        ->and($instruments->first()->ticker)->toBeString('STN_US_EQ')
+        ->and($instruments->first()->ticker)->toBeString()
+        ->and($instruments->first()->ticker)->toEqual('STN_US_EQ')
         ->and($instruments->first()->type)->toEqual(InstrumentType::STOCK)
-        ->and($instruments->first()->workingScheduleId)->toBeInt(56);
+        ->and($instruments->first()->workingScheduleId)->toBeInt()
+        ->and($instruments->first()->workingScheduleId)->toEqual(56);
 });
