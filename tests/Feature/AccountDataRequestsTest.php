@@ -5,9 +5,11 @@ use DanWithams\Trading212Api\Collections\ExchangeCollection;
 use DanWithams\Trading212Api\Collections\InstrumentsCollection;
 use DanWithams\Trading212Api\Collections\TimeEventCollection;
 use DanWithams\Trading212Api\Collections\WorkingScheduleCollection;
+use DanWithams\Trading212Api\Enums\Currency;
 use DanWithams\Trading212Api\Enums\InstrumentType;
 use DanWithams\Trading212Api\Enums\TimeEventType;
 use DanWithams\Trading212Api\Models\AccountData\AccountCash;
+use DanWithams\Trading212Api\Models\AccountData\AccountMetadata;
 use DanWithams\Trading212Api\Models\Instrument;
 use DanWithams\Trading212Api\Models\InstrumentsMetaData\Exchange;
 use DanWithams\Trading212Api\Models\InstrumentsMetaData\TimeEvent;
@@ -42,5 +44,25 @@ test('fetch account cash', function () {
         ->and($accountCash->total)->toEqual(9001.0)
         ->and($accountCash->blocked)->toBeFloat()
         ->and($accountCash->blocked)->toEqual(10.0);
+});
+
+test('fetch account metadata', function () {
+    $api = createApi();
+    $payload = getJsonPayload('fetch-account-metadata');
+
+    $api->client->config->setMock(
+        new MockHandler([
+            new Response(200, [], $payload),
+        ])
+    );
+
+    $accountMetadata = $api->fetchAccountMetadata();
+
+    expect($accountMetadata)->toBeInstanceOf(AccountMetadata::class)
+        ->and($accountMetadata->id)->toBeInt()
+        ->and($accountMetadata->id)->toEqual(1337)
+        ->and($accountMetadata->currencyCode)->toEqual(Currency::USD)
+
+    ;
 });
 

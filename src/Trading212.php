@@ -10,9 +10,11 @@ use DanWithams\Trading212Api\Enums\DividendCashAction;
 use DanWithams\Trading212Api\Enums\Icon;
 use DanWithams\Trading212Api\Exceptions\IncorrectResponseException;
 use DanWithams\Trading212Api\Models\AccountData\AccountCash;
+use DanWithams\Trading212Api\Models\AccountData\AccountMetadata;
 use DanWithams\Trading212Api\Models\Equity\Pie;
 use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Requests\AccountData\FetchAccountCash;
+use DanWithams\Trading212Api\Requests\AccountData\FetchAccountMetadata;
 use DanWithams\Trading212Api\Requests\Equity\CreatePie;
 use DanWithams\Trading212Api\Requests\Equity\DeletePie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPie;
@@ -147,6 +149,18 @@ class Trading212
         if (! ($response instanceof AccountCash)) {
             $this->throwBadResponseException();
         }
+
+        return $response;
+    }
+
+    public function fetchAccountMetadata(): AccountMetadata
+    {
+        $response = $this->client->sendRequest(new FetchAccountMetadata);
+
+        if (! ($response instanceof AccountMetadata)) {
+            $this->throwBadResponseException();
+        }
+
         return $response;
     }
 
