@@ -10,11 +10,10 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 
 test('fetch exchanges', function () {
-    [$config, $api] = createApi();
+    $api = createApi();
+    $payload = getJsonPayload('fetch-exchange-list');
 
-    $payload = file_get_contents(__DIR__ . '/../Payloads/fetch-exchange-list.json');
-
-    $config->setMock(
+    $api->client->config->setMock(
         new MockHandler([
             new Response(200, [], $payload),
         ])

@@ -19,11 +19,11 @@ use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchExchangeList;
 
 class Trading212
 {
-    protected Client $client;
+    public readonly Client $client;
 
-    public function __construct(ClientConfig $config)
+    public function __construct(Client|ClientConfig $client)
     {
-        $this->client = new Client($config);
+        $this->client = $client instanceof Client ? $client : new Client($client);
     }
 
     public function fetchExchangeList(): ExchangeCollection

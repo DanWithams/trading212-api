@@ -7,11 +7,12 @@ use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Collections\PieCollection;
 
 test('fetch all pies', function () {
-    [$config, $api] = createApi();
+    $api = createApi();
+    $payload = getJsonPayload('fetch-all-pies');
 
-    $config->setMock(
+    $api->client->config->setMock(
         new MockHandler([
-            new Response(200, [], '[{"id":548841,"cash":0.00,"dividendDetails":{"gained":0.00,"reinvested":0.00,"inCash":0.00},"result":{"investedValue":99.68,"value":100.99,"result":1.31,"resultCoef":0.0131},"progress":null,"status":null}]'),
+            new Response(200, [], $payload),
         ])
     );
 
@@ -25,11 +26,12 @@ test('fetch all pies', function () {
 });
 
 test('create pie', function () {
-    [$config, $api] = createApi();
+    $api = createApi();
+    $payload = getJsonPayload('create-pie');
 
-    $config->setMock(
+    $api->client->config->setMock(
         new MockHandler([
-            new Response(200, [], '{"instruments":[{"ticker":"AAPL_US_EQ","result":{"investedValue":0,"value":0,"result":0,"resultCoef":0},"expectedShare":0.5,"currentShare":0,"ownedQuantity":0,"issues":[]},{"ticker":"MSFT_US_EQ","result":{"investedValue":0,"value":0,"result":0,"resultCoef":0},"expectedShare":0.5,"currentShare":0,"ownedQuantity":0,"issues":[]}],"settings":{"id":584735,"instrumentShares":null,"name":"My Test Pie","icon":"Home","goal":2000,"creationDate":"2024-07-04T23:59:59.999+03:00","endDate":"2019-08-24T23:59:59.999+03:00","initialInvestment":null,"dividendCashAction":"REINVEST","publicUrl":null}}'),
+            new Response(200, [], $payload),
         ])
     );
 
@@ -49,11 +51,12 @@ test('create pie', function () {
 });
 
 test('delete pie', function () {
-    [$config, $api] = createApi();
+    $api = createApi();
+    $payload = getJsonPayload('delete-pie');
 
-    $config->setMock(
+    $api->client->config->setMock(
         new MockHandler([
-            new Response(200, [], '{}'),
+            new Response(200, [], $payload),
         ])
     );
 
@@ -64,11 +67,12 @@ test('delete pie', function () {
 
 
 test('fetch a pie', function () {
-    [$config, $api] = createApi();
+    $api = createApi();
+    $payload = getJsonPayload('fetch-pie');
 
-    $config->setMock(
+    $api->client->config->setMock(
         new MockHandler([
-            new Response(200, [], '{"instruments":[{"ticker":"AIRp_EQ","result":{"investedValue":12.98,"value":11.20,"result":-1.78,"resultCoef":-0.1371},"expectedShare":0.1300,"currentShare":0.1108,"ownedQuantity":0.0972557000,"issues":[]},{"ticker":"RHMd_EQ","result":{"investedValue":12.98,"value":15.46,"result":2.48,"resultCoef":0.1911},"expectedShare":0.1300,"currentShare":0.1529,"ownedQuantity":0.0352670000,"issues":[]},{"ticker":"HOp_EQ","result":{"investedValue":12.94,"value":13.83,"result":0.89,"resultCoef":0.0688},"expectedShare":0.1300,"currentShare":0.1368,"ownedQuantity":0.1043213000,"issues":[]},{"ticker":"FINMY_US_EQ","result":{"investedValue":12.98,"value":13.70,"result":0.72,"resultCoef":0.0555},"expectedShare":0.1300,"currentShare":0.1355,"ownedQuantity":1.4505990000,"issues":[]},{"ticker":"BAl_EQ","result":{"investedValue":11.94,"value":12.21,"result":0.27,"resultCoef":0.0226},"expectedShare":0.1200,"currentShare":0.1208,"ownedQuantity":0.9483953900,"issues":[]},{"ticker":"DSYp_EQ","result":{"investedValue":11.94,"value":9.73,"result":-2.21,"resultCoef":-0.1851},"expectedShare":0.1200,"currentShare":0.0962,"ownedQuantity":0.3264100000,"issues":[]},{"ticker":"BABl_EQ","result":{"investedValue":11.94,"value":12.35,"result":0.41,"resultCoef":0.0343},"expectedShare":0.1200,"currentShare":0.1221,"ownedQuantity":2.3738166000,"issues":[]},{"ticker":"HAGd_EQ","result":{"investedValue":11.98,"value":12.63,"result":0.65,"resultCoef":0.0543},"expectedShare":0.1200,"currentShare":0.1249,"ownedQuantity":0.4116630000,"issues":[]}],"settings":{"id":548841,"instrumentShares":null,"name":"Defence","icon":null,"goal":null,"creationDate":"2024-03-05T23:59:59.999+03:00","endDate":null,"initialInvestment":null,"dividendCashAction":"REINVEST","publicUrl":null}}'),
+            new Response(200, [], $payload),
         ])
     );
 

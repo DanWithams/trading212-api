@@ -24,6 +24,9 @@
 |
 */
 
+use DanWithams\Trading212Api\ClientConfig;
+use DanWithams\Trading212Api\Trading212;
+
 expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
@@ -39,12 +42,20 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function createApi() {
-    $config = new \DanWithams\Trading212Api\ClientConfig(
-        hostname: 'api.mock.test',
-        secret: 'FakeSecret',
+function createApi()
+{
+    return new Trading212(
+        new ClientConfig(
+            hostname: 'api.mock.test',
+            secret: 'FakeSecret',
+        )
     );
-
-    return [$config, new \DanWithams\Trading212Api\Trading212($config)];
 }
 
+function getJsonPayload(string $name): string
+{
+    $path = __DIR__ . "/Payloads/$name.json";
+    return file_exists($path)
+        ? file_get_contents($path)
+        : throw new Exception('Poo');
+}
