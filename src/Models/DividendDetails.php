@@ -4,14 +4,20 @@ namespace DanWithams\Trading212Api\Models;
 
 readonly class DividendDetails
 {
-    public readonly float $gained;
-    public readonly float $reinvested;
-    public readonly float $inCash;
+    public function __construct(
+        public float $gained,
+        public float $reinvested,
+        public float $inCash
+    ) {
 
-    public function __construct(array $data)
+    }
+
+    public static function hydrateFromApi(array $data): self
     {
-        $this->gained = $data['gained'];
-        $this->reinvested = $data['reinvested'];
-        $this->inCash = $data['inCash'];
+        return new self(
+            gained: $data['gained'],
+            reinvested: $data['reinvested'],
+            inCash: $data['inCash']
+        );
     }
 }

@@ -7,17 +7,23 @@ use DanWithams\Trading212Api\Contracts\HasId;
 
 readonly class Pie implements HasId
 {
-    public InstrumentsCollection $instruments;
-    public PieSettings $settings;
+    public function __construct(
+        public InstrumentsCollection $instruments,
+        public PieSettings $settings
+    ) {
 
-    public function __construct(array $data)
-    {
-        $this->instruments = new InstrumentsCollection($data['instruments']);
-        $this->settings = new PieSettings($data['settings']);
     }
 
     public function getId(): int
     {
         return $this->settings->id;
+    }
+
+    public static function hydrateFromApi(array $data): self
+    {
+        return new self(
+            instruments: new InstrumentsCollection($data['instruments']),
+            settings: PieSettings::hydrateFromApi($data['settings'])
+        );
     }
 }

@@ -4,16 +4,22 @@ namespace DanWithams\Trading212Api\Models\Equity;
 
 readonly class PieResult
 {
-    protected readonly float $investedValue;
-    protected readonly float $result;
-    protected readonly float $resultCoefficient;
-    protected readonly float $value;
+    public function __construct(
+        protected float $investedValue,
+        protected float $result,
+        protected float $resultCoefficient,
+        protected float $value
+    ) {
 
-    public function __construct(array $data)
+    }
+
+    public static function hydrateFromApi(array $data): self
     {
-        $this->investedValue = $data['investedValue'];
-        $this->result = $data['result'];
-        $this->resultCoefficient = $data['resultCoef'];
-        $this->value = $data['value'];
+        return new self(
+            investedValue: $data['investedValue'],
+            result: $data['result'],
+            resultCoefficient: $data['resultCoef'],
+            value: $data['value']
+        );
     }
 }

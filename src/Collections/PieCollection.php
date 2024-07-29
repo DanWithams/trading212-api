@@ -10,7 +10,7 @@ class PieCollection extends Collection
     public function __construct($array = [])
     {
         parent::__construct(
-            array_map(fn ($data) => new PieSummary($data), $array)
+            array_map(fn ($item) => $item instanceof PieSummary ? $item : PieSummary::hydrateFromApi($item), $array)
         );
     }
 }

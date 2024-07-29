@@ -46,6 +46,6 @@ class FetchPie extends BaseRequest
     {
         $data = self::parseResponse($response);
 
-        return new Pie($data);
+        return Pie::hydrateFromApi($data);
     }
 }

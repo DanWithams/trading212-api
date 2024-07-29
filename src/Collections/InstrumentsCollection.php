@@ -10,7 +10,7 @@ class InstrumentsCollection extends Collection
     public function __construct($array = [])
     {
         parent::__construct(
-            array_map(fn ($data) => new Instrument($data), $array)
+            array_map(fn ($item) => $item instanceof Instrument ? $item : Instrument::hydrateFromApi($item), $array)
         );
     }
 }
