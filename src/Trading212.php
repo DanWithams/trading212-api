@@ -16,7 +16,7 @@ use DanWithams\Trading212Api\Requests\Equity\DeletePie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPie;
 use DanWithams\Trading212Api\Requests\Equity\FetchPies;
 use DanWithams\Trading212Api\Requests\Equity\UpdatePie;
-use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchExchangeList;
+use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchExchange;
 use DanWithams\Trading212Api\Requests\InstrumentsMetaData\FetchInstruments;
 
 class Trading212
@@ -30,7 +30,7 @@ class Trading212
 
     public function fetchExchanges(): ExchangeCollection
     {
-        $response = $this->client->sendRequest(new FetchExchangeList);
+        $response = $this->client->sendRequest(new FetchExchange);
 
         if (! ($response instanceof ExchangeCollection)) {
             $this->throwBadResponseException();

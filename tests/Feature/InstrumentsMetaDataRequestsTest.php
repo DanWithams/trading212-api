@@ -15,7 +15,7 @@ use GuzzleHttp\Psr7\Response;
 
 test('fetch exchanges', function () {
     $api = createApi();
-    $payload = getJsonPayload('fetch-exchange-list');
+    $payload = getJsonPayload('fetch-exchange');
 
     $api->client->config->setMock(
         new MockHandler([

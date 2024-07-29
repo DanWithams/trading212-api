@@ -7,7 +7,7 @@ use DanWithams\Trading212Api\Enums\HttpVerb;
 use DanWithams\Trading212Api\Requests\BaseRequest;
 use Psr\Http\Message\ResponseInterface;
 
-class FetchExchangeList extends BaseRequest
+class FetchExchange extends BaseRequest
 {
     public function getVerb(): HttpVerb
     {
