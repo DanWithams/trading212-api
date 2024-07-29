@@ -3,12 +3,13 @@
 namespace DanWithams\Trading212Api\Models\InstrumentsMetaData;
 
 use Carbon\Carbon;
+use DanWithams\Trading212Api\Enums\TimeEventType;
 
 readonly class TimeEvent
 {
     public function __construct(
         public Carbon $date,
-        public ?string $type = null
+        public TimeEventType $type
     ) {
 
     }
@@ -17,7 +18,7 @@ readonly class TimeEvent
     {
         return new self(
             date: Carbon::parse($data['date']),
-            type: $data['type']
+            type: TimeEventType::from($data['type'])
         );
     }
 }
