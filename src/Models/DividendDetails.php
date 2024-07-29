@@ -14,10 +14,12 @@ readonly class DividendDetails
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
+
         return new self(
-            gained: $data['gained'],
-            reinvested: $data['reinvested'],
-            inCash: $data['inCash']
+            gained: $data->get('gained'),
+            reinvested: $data->get('reinvested'),
+            inCash: $data->get('inCash')
         );
     }
 }

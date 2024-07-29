@@ -25,7 +25,7 @@ readonly class PieSettings
 
     public static function hydrateFromApi(array $data): self
     {
-        $data = collect($data);
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
 
         return new self(
             id: $data->get('id'),
@@ -34,7 +34,7 @@ readonly class PieSettings
             goal: $data->get('goal'),
             initialInvestment: $data->get('initialInvestment'),
             instrumentShares: $data->get('instrumentShares'),
-            icon: Icon::tryFrom($data->get('icon') ?? ''),
+            icon: Icon::tryFrom($data->get('icon', '')),
             publicUrl: $data->get('publicUrl'),
             creationDate: Carbon::parse($data->get('creationDate')),
             endDate: Carbon::parse($data->get('endDate'))

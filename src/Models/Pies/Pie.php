@@ -21,7 +21,7 @@ readonly class Pie implements HasId
 
     public static function hydrateFromApi(array $data): self
     {
-        $data = collect($data);
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
 
         return new self(
             instruments: new InstrumentsCollection($data->get('instruments')),

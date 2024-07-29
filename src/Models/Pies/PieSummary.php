@@ -25,7 +25,7 @@ readonly class PieSummary implements HasId
 
     public static function hydrateFromApi(array $data): self
     {
-        $data = collect($data);
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
 
         return new self(
             id: $data->get('id'),

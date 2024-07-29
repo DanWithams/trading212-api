@@ -21,15 +21,17 @@ readonly class Instrument
 
     public static function hydrateFromApi(array $data): self
     {
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
+
         return new self(
-            ticker: $data['ticker'],
-            type: InstrumentType::tryFrom($data['type'] ?? ''),
-            workingScheduleId: $data['workingScheduleId'] ?? null,
-            result: $data['result'] ?? null,
-            expectedShare: $data['expectedShare'] ?? null,
-            currentShare: $data['currentShare'] ?? null,
-            ownedQuantity: $data['ownedQuantity'] ?? null,
-            issues: $data['issues'] ?? null,
+            ticker: $data->get('ticker'),
+            type: InstrumentType::tryFrom($data->get('type', '')),
+            workingScheduleId: $data->get('workingScheduleId'),
+            result: $data->get('result'),
+            expectedShare: $data->get('expectedShare'),
+            currentShare: $data->get('currentShare'),
+            ownedQuantity: $data->get('ownedQuantity'),
+            issues: $data->get('issues')
         );
     }
 }

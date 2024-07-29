@@ -15,7 +15,7 @@ readonly class PieResult
 
     public static function hydrateFromApi(array $data): self
     {
-        $data = collect($data);
+        $data = collect($data)->filter(fn ($item) => ! is_null($item));
 
         return new self(
             investedValue: $data->get('investedValue'),
