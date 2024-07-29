@@ -6,9 +6,9 @@ use DanWithams\Trading212Api\Models\Equity\Pie;
 use DanWithams\Trading212Api\Models\Equity\PieSummary;
 use DanWithams\Trading212Api\Collections\PieCollection;
 
-test('fetch all pies', function () {
+test('fetch pies', function () {
     $api = createApi();
-    $payload = getJsonPayload('fetch-all-pies');
+    $payload = getJsonPayload('fetch-pies');
 
     $api->client->config->setMock(
         new MockHandler([
